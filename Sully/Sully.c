@@ -1,4 +1,9 @@
+#include<stdlib.h>
 #include<stdio.h>
-#define FNAME(X) "Sully_"#X".c"
-#define FT(x) int main(){int i=x;char* fmt="#include<stdio.h>%c#define FNAME(X) %cSully_%c#X%c.c%c%c#define FT(x) int main(){int i=%d;char* fmt=%c%s%c;FILE* f;if(x > 0 && (f = fopen(FNAME(x), %cw+%c))){fprintf(f,fmt,10,34,34,34,34,10,x-1,34,fmt,34,34,34,10);}}%cFT(%d)";FILE* f;if(x > 0 && (f = fopen(FNAME(x), "w+"))){fprintf(f,fmt,10,34,34,34,34,10,x-1,34,fmt,34,34,34,10,x-1);}}
-FT(5)
+int main(){
+    int i = 5;
+    char *name;
+    char *cmd;
+    FILE *f;
+    char *fmt="#include<stdlib.h>%c#include<stdio.h>%cint main(){%c    int i = %d;%c    char *name;%c    char *cmd;%c    FILE *f;%cchar *fmt=%c%s%c;%c    if (asprintf(&name, %cSully_%%d.c%c, i) >= 0 && asprintf(&cmd, %cgcc %%s; ./a.out%c, name) >= 0){if (i >= 0 && (f = fopen(name, %cw+%c))){fprintf(f, fmt,10,10,10,i-1,10,10,10,10,34,fmt,34,10,34,34,34,34,34,34);system(cmd);}}}";
+    if (asprintf(&name, "Sully_%d.c", i) >= 0 && asprintf(&cmd, "gcc %s; ./a.out", name) >= 0){if (i >= 0 && (f = fopen(name, "w+"))){fprintf(f, fmt,10,10,10,i-1,10,10,10,10,34,fmt,34,10,34,34,34,34,34,34);system(cmd);}}}
