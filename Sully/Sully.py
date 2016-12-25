@@ -13,15 +13,22 @@ else:
     if argv[0].find('_') > -1:
         i -= 1
     ename = name %% i
-    with open(ename, "w+") as fd:
-        fd.write(frmt %% (i,34,34,34,frmt,34,34,34))
-    system("python %%s" %% (ename))"""
+    try:
+        with open(ename, "w+") as fd:
+            fd.write(frmt %% (i,34,34,34,frmt,34,34,34))
+        system("python %%s" %% (ename))
+    except:
+        print "Error with file opening."
+"""
 if i <= 0:
     exit()
 else:
     if argv[0].find('_') > -1:
         i -= 1
     ename = name % i
-    with open(ename, "w+") as fd:
-        fd.write(frmt % (i,34,34,34,frmt,34,34,34))
-    system("python %s" % (ename))
+    try:
+        with open(ename, "w+") as fd:
+            fd.write(frmt % (i,34,34,34,frmt,34,34,34))
+        system("python %s" % (ename))
+    except:
+        print "Error with file opening."
