@@ -15,10 +15,10 @@ make re > /dev/null
 mv Sully ./sandbox/
 cd sandbox
 ./Sully
-if [ "$( ls -l | grep Sully | wc -l )" == "13" ] ; then
+if [ "$( ls -l | grep Sully | wc -l )" == "      13" ] ; then
     echo -e "    ${GREEN}OK${NC}"
 else
-    echo -e "    ${RED}KO${NC}"
+    echo -e "    ${RED}KO: \"$( ls -l | grep Sully | wc -l )\" instead of \"      13\"${NC}"
 fi
 
 # Test files are properly self-reproduced
@@ -26,7 +26,7 @@ echo -e "${BLUE}Test Sully.c properly self-reproduce itself:${NC}"
 if [ "$( diff ../Sully.c Sully_5.c )" == "" ] ; then
     echo -e "    ${GREEN}OK${NC}"
 else
-    echo -e "    ${RED}KO${NC}"
+    echo -e "    ${RED}KO: differences found \"$( diff ../Sully.c Sully_5.c )\"${NC}"
 fi
 
 # Test files are properly decremented
@@ -36,7 +36,9 @@ if [ "$( diff ../Sully.c Sully_4.c | tail -n 3 )" == "< int i = 5;
 > int i = 4;" ] ; then
     echo -e "    ${GREEN}OK${NC}"
 else
-    echo -e "    ${RED}KO${NC}"
+     echo -e "    ${RED}KO: \"$( diff ../Sully.c Sully_4.c | tail -n 3 )\" instead of: \"< int i = 5;
+---
+> int i = 4;\"${NC}"
 fi
 
 rm Sully_*
@@ -46,10 +48,10 @@ echo -e "${BLUE}Test Sully.c error handling:${NC}"
 touch Sully_3.c
 chmod 400 Sully_3.c
 ./Sully
-if [ "$( ls -l | grep Sully | wc -l )" == "6" ] ; then
+if [ "$( ls -l | grep Sully | wc -l )" == "       6" ] ; then
     echo -e "    ${GREEN}OK${NC}"
 else
-    echo -e "    ${RED}KO${NC}"
+    echo -e "    ${RED}KO: \"$( ls -l | grep Sully | wc -l )\" instead of \"       6\"${NC}"
 fi
 cd ../
 rm -rf sandbox
@@ -60,10 +62,10 @@ echo -e "${BLUE}Bonus Test Sully.py number of created files:${NC}"
 cp Sully.py ./sandbox/
 cd sandbox
 python Sully.py
-if [ "$( ls -l | grep Sully | wc -l )" == "7" ] ; then
+if [ "$( ls -l | grep Sully | wc -l )" == "       7" ] ; then
     echo -e "    ${GREEN}OK${NC}"
 else
-    echo -e "    ${RED}KO${NC}"
+    echo -e "    ${RED}KO: \"$( ls -l | grep Sully | wc -l )\" instead of \"       7\"${NC}"
 fi
 
 # Test files are properly self-reproduced
@@ -71,7 +73,7 @@ echo -e "${BLUE}Bonus Test Sully.py properly self-reproduce itself:${NC}"
 if [ "$( diff ../Sully.py Sully_5.py )" == "" ] ; then
     echo -e "    ${GREEN}OK${NC}"
 else
-    echo -e "    ${RED}KO${NC}"
+    echo -e "    ${RED}KO: differences found \"$( diff ../Sully.py Sully_5.py )\"${NC}"
 fi
 
 # Test files are properly decremented
@@ -81,7 +83,9 @@ if [ "$( diff Sully_5.py Sully_4.py | tail -n 3 )" == "< i = 5
 > i = 4" ] ; then
     echo -e "    ${GREEN}OK${NC}"
 else
-    echo -e "    ${RED}KO${NC}"
+    echo -e "    ${RED}KO: \"$( diff ../Sully_5.py Sully_4.py | tail -n 3 )\" instead of: \"< i = 5
+---
+> i = 4\"${NC}"
 fi
 
 rm Sully_*
@@ -91,9 +95,9 @@ echo -e "${BLUE}Bonus Test Sully.py error handling:${NC}"
 touch Sully_3.py
 chmod 400 Sully_3.py
 python Sully.py
-if [ "$( ls -l | grep Sully | wc -l )" == "4" ] ; then
+if [ "$( ls -l | grep Sully | wc -l )" == "       4" ] ; then
     echo -e "    ${GREEN}OK${NC}"
 else
-    echo -e "    ${RED}KO${NC}"
+    echo -e "    ${RED}KO: \"$( ls -l | grep Sully | wc -l )\" instead of  \"       4\"${NC}"
 fi
 rm -rf ../sandbox
