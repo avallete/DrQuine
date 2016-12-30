@@ -33,10 +33,4 @@ else
     echo -e "    ${RED}KO${NC}"
 fi
 
-# Test if the program didn't fail if Grace_kid.py opening fail
-echo -e "${BLUE}Test Grace.py behavior with unauthorized file:${NC}"
-chmod 400 Grace_kid.py
-python Grace.py
-echo -e "    ${GREEN}OK${NC}"
-
 rm -rf Grace_kid*
